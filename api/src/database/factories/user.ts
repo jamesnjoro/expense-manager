@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 
 
-import { hashPasword } from '../../helpers/passwordHash';
+import { hashPasword } from '../../helpers/auth/passwordHash';
 
 module.exports = async() => {
     let user:any = {};

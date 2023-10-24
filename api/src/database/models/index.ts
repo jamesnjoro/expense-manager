@@ -7,10 +7,9 @@ import {sequelize} from './sequelize'
 import {User} from './user'
 
 
-module.exports =  {
+export {
   User,
   sequelize,
   Sequelize
 };
-export { User };
 

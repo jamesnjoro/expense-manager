@@ -9,7 +9,7 @@ module.exports = {
     dialect: 'postgres',
     dialectModule: pg,
     host: 'localhost',
-    logging: true,
+    logging: console.log,
     migrationStorage: 'sequelize',
     port: 5432,
     underscored: true
