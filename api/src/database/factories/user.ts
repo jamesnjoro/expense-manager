@@ -8,8 +8,8 @@ module.exports = async() => {
     user.name = faker.person.firstName();
     user.email = faker.internet.email();
     user.password_hash = hashPasword("test123");
-    user.createdAt = new Date().toISOString();
-    user.updatedAt = new Date().toISOString();
+    user.created_at = new Date().toISOString();
+    user.updated_at = new Date().toISOString();
 
     return user;
 }

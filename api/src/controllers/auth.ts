@@ -39,10 +39,10 @@ const createUser = async (req: Request, res: Response) => {
             err.message = `Provided token is invalid!`;
             throw err;
         }
-        const user = { name, email, password_hash: hashPasword(password) }
-        const newUser = await repository.create(user);
+        const user = { name, email, passwordHash: hashPasword(password) }
+        await repository.create(user);
         res.status(201);
-        return res.json({ data: newUser, message: "User created successfully." });
+        return res.json({message: "User created successfully." });
     } catch (err) {
         return transformError(err, res);
     }
@@ -52,7 +52,7 @@ const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body
         const user = await repository.getByEmail(email);
-        if (!verifyPassword(user.password_hash, password)) {
+        if (!verifyPassword(user.passwordHash, password)) {
             let err = new Error();
             err.name = 'Incorrect Password'
             err.message = `The password provided for email ${user.email} is invalid.`;

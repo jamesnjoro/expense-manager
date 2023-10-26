@@ -1,16 +1,12 @@
 import express from "express";
 import validate from "../validations/validate"
-import validationSchema from "../validations/expenditure"
-import controller from "../controllers/expenditure"
+import validationSchema from "../validations/expenditure_user"
+import controller from "../controllers/expenditure_user"
 
 const router = express.Router();
 
 router.get('/',
     controller.list)
-
-router.get('/:id',
-    validate(validationSchema, 'read', 'params'),
-    controller.read)
 
 router.post('/',
     validate(validationSchema, 'create', 'body'),
@@ -26,7 +22,7 @@ router.delete('/:id',
     controller.destroy)
 
 module.exports = {
-    path: 'expenditures',
+    path: 'expenditure_user',
     router: router,
     version: 'v1'
 }

@@ -8,21 +8,21 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare id: CreationOptional<number>;
   declare name: string;
   declare email: string;
-  declare password_hash: string;
+  declare passwordHash: string;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
 User.init(
   {
-    id:{
-      type:DataTypes.INTEGER,
-      autoIncrement:true,
-      primaryKey:true
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password_hash: DataTypes.STRING,
+    passwordHash: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   },

@@ -2,10 +2,10 @@
 const buildFake = require("../factories");
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("expenditures", await buildFake("expenditure", 10), {});
+    await queryInterface.bulkInsert("users", await buildFake("user", 10), {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("expenditures", null, {});
+    await queryInterface.bulkDelete("users", null, {});
   },
 };

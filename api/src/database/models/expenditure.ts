@@ -13,10 +13,10 @@ export class Expenditure extends Model<InferAttributes<Expenditure>, InferCreati
 
 Expenditure.init(
   {
-    id:{
-      type:DataTypes.INTEGER,
-      autoIncrement:true,
-      primaryKey:true
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
     name: DataTypes.STRING,
     createdAt: DataTypes.DATE,
