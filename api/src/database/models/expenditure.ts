@@ -2,6 +2,7 @@
 
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize'
+import { authorizeById } from '../scopes';
 
 export class Expenditure extends Model<InferAttributes<Expenditure>, InferCreationAttributes<Expenditure>> {
 
@@ -25,5 +26,9 @@ Expenditure.init(
   {
     sequelize,
     modelName: "Expenditure",
+    scopes: {
+      authorizeById
+    }
   }
 );
+

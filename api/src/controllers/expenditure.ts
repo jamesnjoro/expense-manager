@@ -3,9 +3,9 @@ import transformError from '../helpers/controller/errorResponse';
 import respository from '../repositories/expenditure';
 
 
-const list = async (_req: Request, res: Response) => {
+const list = async (req: Request, res: Response) => {
     try {
-        const result = await respository.list();
+        const result = await respository.list(req);
         res.status(200);
         return res.json({ data: result, message: "Success" })
     } catch (err) {
@@ -15,7 +15,7 @@ const list = async (_req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
     try {
-        const result = await respository.read(parseInt(req.params.id))
+        const result = await respository.read(parseInt(req.params.id),req)
         res.status(200);
         return res.json({ data: result, message: "Success" })
     } catch (err) {
@@ -25,7 +25,7 @@ const read = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
     try {
-        const result = await respository.create(req.body);
+        const result = await respository.create(req.body,req);
         res.status(201);
         return res.json({ data: result, message: "Expenditure created successfully" })
     } catch (err) {
@@ -35,7 +35,7 @@ const create = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
     try {
-        const result = await respository.update(parseInt(req.params.id), req.body);
+        const result = await respository.update(parseInt(req.params.id), req.body,req);
         res.status(200);
         return res.json({ data: result, message: "Expenditure updated successfully" })
     } catch (err) {
@@ -45,7 +45,7 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
     try {
-        const result = await respository.destroy(parseInt(req.params.id));
+        const result = await respository.destroy(parseInt(req.params.id),req);
         res.status(202);
         return res.json({ data: result, message: "Expenditure Deleted successfully" })
     } catch (err) {

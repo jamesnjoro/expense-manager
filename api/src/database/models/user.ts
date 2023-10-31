@@ -3,6 +3,7 @@
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize'
 
+
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
   declare id: CreationOptional<number>;
@@ -31,3 +32,4 @@ User.init(
     modelName: "User",
   }
 );
+

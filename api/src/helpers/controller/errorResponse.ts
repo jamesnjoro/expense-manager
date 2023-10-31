@@ -4,7 +4,7 @@ const errors404 = ['Not Found'];
 
 const error422 = ['SequelizeForeignKeyConstraintError']
 
-const errors401 = ['Incorrect Password', 'Invalid token', 'JsonWebTokenError'];
+const errors401 = ['Incorrect Password', 'Invalid token', 'JsonWebTokenError', 'Unauthorized'];
 
 export default function (err: any, res: Response) {
     res.status(500);
@@ -19,6 +19,7 @@ export default function (err: any, res: Response) {
     if (error422.includes(err.name)) {
         res.status(422);
     }
+    console.log(err)
     res.json({ error: err.name, message: err.message })
     return res;
 }

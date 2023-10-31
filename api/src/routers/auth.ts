@@ -5,8 +5,7 @@ import controller from "../controllers/auth"
 
 const router = express.Router();
 
-router.post('/create-user/:token',
-    validate(validationSchema, 'createUser', 'params'),
+router.post('/create-user',
     validate(validationSchema, 'createUser', 'body'),
     controller.createUser)
 

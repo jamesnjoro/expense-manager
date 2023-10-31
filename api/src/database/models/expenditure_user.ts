@@ -8,7 +8,7 @@ import {
   DataTypes,
 } from "sequelize";
 import { sequelize } from "./sequelize";
-import { User, Expenditure } from "./index";
+import { authorizeByExpenditureId } from "../scopes";
 
 export class ExpenditureUser extends Model<
   InferAttributes<ExpenditureUser>,
@@ -54,13 +54,9 @@ ExpenditureUser.init(
     tableName: "expenditure_user",
     sequelize,
     modelName: "ExpenditureUser",
+    scopes:{
+      authorizeByExpenditureId
+    }
   }
 );
 
-ExpenditureUser.belongsTo(User, {
-  foreignKey: "userId",
-});
-
-ExpenditureUser.belongsTo(Expenditure, {
-  foreignKey: "expenditureId",
-});

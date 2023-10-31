@@ -29,8 +29,7 @@ const register = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     try {
-        const token = req.params.token;
-        const { name, password } = req.body
+        const { name, password, token } = req.body
 
         const {email} = await verifyToken(token);
         if (!email) {
@@ -58,7 +57,7 @@ const login = async (req: Request, res: Response) => {
             err.message = `The password provided for email ${user.email} is invalid.`;
             throw err;
         }
-        const token = signToken({id:user.id})
+        const token = signToken({userId:user.id,email:user.email})
         res.status(200);
         return res.json({ data: {token}, message: "Log in successful." })
     } catch (err) {
