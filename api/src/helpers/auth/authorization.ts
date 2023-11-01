@@ -11,7 +11,7 @@ export function buildScope(expenditurefield: string, ids: Array<number>): ScopeO
     switch (expenditurefield) {
         case 'id':
             return { method: ['authorizeById', ids] };
-        case 'expenditurId':
+        case 'expenditureId':
             return { method: ['authorizeByExpenditureId', ids] };
         default:
             return { method: '' };

@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      "expenditure_user",
+      "products",
       {
         id: {
           allowNull: false,
@@ -13,29 +13,18 @@ module.exports = {
         },
         expenditure_id: {
           type: Sequelize.INTEGER,
-          allowNull: false,
           references: {
             key: "id",
             model: {
               tableName: "expenditures",
             },
           },
-          unique: "unique_expenditure_user",
+          unique: "unique_expenditure_product",
         },
-        user_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            key: "id",
-            model: {
-              tableName: "users",
-            },
-          },
-          unique: "unique_expenditure_user",
-        },
-        access_level: {
+        name: {
           allowNull: false,
           type: Sequelize.STRING,
+          unique: "unique_expenditure_product",
         },
         created_at: {
           allowNull: false,
@@ -48,14 +37,14 @@ module.exports = {
       },
       {
         uniqueKeys: {
-          unique_expenditure_user: {
-            fields: ["expenditure_id","user_id"],
+          unique_expenditure_product: {
+            fields: ["expenditure_id", "name"],
           },
         },
       }
     );
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("expenditure_user");
+    await queryInterface.dropTable("products");
   },
 };
