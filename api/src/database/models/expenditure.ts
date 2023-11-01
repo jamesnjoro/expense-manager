@@ -3,6 +3,7 @@
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize'
 import { authorizeById } from '../scopes';
+import { ExpenditureUser } from './index';
 
 export class Expenditure extends Model<InferAttributes<Expenditure>, InferCreationAttributes<Expenditure>> {
 
@@ -28,6 +29,11 @@ Expenditure.init(
     modelName: "Expenditure",
     scopes: {
       authorizeById
+    },
+    hooks:{
+      beforeDestroy:async(expenditure)=>{
+        await ExpenditureUser.destroy({where:{expenditureId:expenditure.id}})
+      }
     }
   }
 );

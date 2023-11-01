@@ -1,4 +1,3 @@
-import _ from 'lodash'
 export const authorizeById = (ids: number|Array<number> = []) => {
     return {
         where: {
