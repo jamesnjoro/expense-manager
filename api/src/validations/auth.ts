@@ -12,10 +12,8 @@ const createUser = {
         name: Joi.string().required(),
         password: Joi.string().required(),
         repeat_password: Joi.ref('password'),
-    }).with('password', 'repeat_password'),
-    params: Joi.object({
         token: Joi.string().required()
-    })
+    }).with('password', 'repeat_password')
 }
 
 const login = {

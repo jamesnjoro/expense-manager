@@ -11,7 +11,7 @@ export default function (schema: any, action: string, requestProperty: string) {
     let property = requestProperty as keyof typeof RequestData;
 
     if (
-      !req.headers["content-type"] || (req.headers["content-type"] &&
+      (!["GET","DELETE"].includes(req.method) && !req.headers["content-type"]) || (req.headers["content-type"] &&
         req.headers["content-type"] !== "application/json")
 
     ) {

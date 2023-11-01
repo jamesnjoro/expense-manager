@@ -2,19 +2,18 @@
 
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize';
 import { sequelize } from './sequelize'
+import { authorizeById } from '../scopes';
+import { ExpenditureUser } from './index';
 
-
-export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+export class Expenditure extends Model<InferAttributes<Expenditure>, InferCreationAttributes<Expenditure>> {
 
   declare id: CreationOptional<number>;
   declare name: string;
-  declare email: string;
-  declare passwordHash: string;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
-User.init(
+Expenditure.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -22,14 +21,20 @@ User.init(
       primaryKey: true
     },
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    passwordHash: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   },
   {
     sequelize,
-    modelName: "User",
+    modelName: "Expenditure",
+    scopes: {
+      authorizeById
+    },
+    hooks:{
+      beforeDestroy:async(expenditure)=>{
+        await ExpenditureUser.destroy({where:{expenditureId:expenditure.id}})
+      }
+    }
   }
 );
 
