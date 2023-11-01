@@ -2,7 +2,7 @@ import { Response } from 'express'
 
 const errors404 = ['Not Found'];
 
-const error422 = ['SequelizeForeignKeyConstraintError']
+const error422 = ['SequelizeForeignKeyConstraintError','SequelizeUniqueConstraintError']
 
 const errors401 = ['Incorrect Password', 'Invalid token', 'JsonWebTokenError', 'Unauthorized'];
 
