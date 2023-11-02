@@ -1,55 +1,55 @@
-import { Product } from "../database/models";
+import { Tag } from "../database/models";
 import { buildScope, authorizeAction } from "../helpers/auth/authorization";
 import { Request } from "express";
 
 
 const list = async (req: Request) => {
     let scope = buildScope('expenditureId', req.scopeData.expenditures)
-    return await Product.scope(scope).findAll();
+    return await Tag.scope(scope).findAll();
 }
 
 const read = async (id: number, req: Request) => {
-    let product = await Product.findOne({ where: { id } });
-    if (product === null) {
+    let tag = await Tag.findOne({ where: { id } });
+    if (tag === null) {
         let err = new Error();
         err.name = 'Not Found'
-        err.message = `Product with id '${id}' not found`;
+        err.message = `Tag with id '${id}' not found`;
         throw err;
     }
-    authorizeAction(product, 'expenditureId', req);
-    return product;
+    authorizeAction(tag, 'expenditureId', req);
+    return tag;
 }
 
 const create = async (body: any, req: Request) => {
     authorizeAction(body, 'expenditureId', req);
-    const product = await Product.create(body);
-    return product
+    const tag = await Tag.create(body);
+    return tag
 }
 
 const update = async (id: number, body: any, req: Request) => {
-    let product = await Product.findOne({ where: { id } });
-    if (product === null) {
+    let tag = await Tag.findOne({ where: { id } });
+    if (tag === null) {
         let err = new Error();
         err.name = 'Not Found'
-        err.message = `Product with id '${id}' not found`;
+        err.message = `Tag with id '${id}' not found`;
         throw err;
     }
     if(body.expenditureId) authorizeAction(body, 'expenditureId', req);
-    authorizeAction(product, 'expenditureId', req);
-    return await product.update(body);
+    authorizeAction(tag, 'expenditureId', req);
+    return await tag.update(body);
 }
 
 const destroy = async (id: number, req: Request) => {
-    let product = await Product.findOne({ where: { id } });
-    if (product === null) {
+    let tag = await Tag.findOne({ where: { id } });
+    if (tag === null) {
         let err = new Error();
         err.name = 'Not Found'
-        err.message = `Product with id '${id}' not found`;
+        err.message = `Tag with id '${id}' not found`;
         throw err;
     }
-    authorizeAction(product, 'expenditureId', req);
-    await product.destroy();
-    return product;
+    authorizeAction(tag, 'expenditureId', req);
+    await tag.destroy();
+    return tag;
 }
 
 
